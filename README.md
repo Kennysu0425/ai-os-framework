@@ -121,6 +121,8 @@ The demo War Room shows how a control plane can consume thin subsystem contracts
 
 without being tightly coupled to subsystem internals.
 
+![AI OS Framework War Room Demo](docs/war-room-demo.png)
+
 Open:
 
 - `demo/index.html`
