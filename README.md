@@ -2,17 +2,27 @@
 
 ![AI OS Framework Hero](docs/demo-hero.png)
 
-Build your own AI Operating System with:
+Build a control plane, not just another pile of agent scripts.
+
+`ai-os-framework` is an open-source starter for people building AI systems that need to stay understandable at the operator and executive layer.
+
+Most AI projects can demo intelligence.
+Much fewer can answer:
+
+- What matters now?
+- What is blocked?
+- Which subsystem is drifting?
+- What should an operator do next?
+
+This framework starts from that operating problem.
+
+It gives you:
 
 - one control plane
 - multiple domain subsystems
 - contract-first integration
-- a unified War Room / operator view
+- a War Room / operator surface
 - health, observability, and recovery primitives
-
-`ai-os-framework` is an open-source starter kit for builders who want something more structured than a collection of prompts, scripts, and agent sessions.
-
-It is especially useful for founders, operators, and technical leaders who want AI systems that are understandable at the management layer, not just impressive at the prompt layer.
 
 It is designed for systems that need to be:
 
@@ -21,7 +31,28 @@ It is designed for systems that need to be:
 - observable instead of opaque
 - portable across local hosts and server environments
 
+This repository is especially useful for founders, operators, and technical leaders who want AI systems that are legible under pressure, not just impressive in isolated sessions.
+
 It does **not** include private user data, personal CRM data, private email data, knowledge memory contents, or company-specific digital twin logic.
+
+## Why This Repo Is Different
+
+Most open-source AI repos stop at one of these layers:
+
+- model access
+- prompting
+- agent orchestration
+- workflow automation
+
+`ai-os-framework` focuses on a different layer:
+
+- control-plane design
+- subsystem boundaries
+- explicit contracts
+- War Room visibility
+- operational recovery
+
+That makes it a better fit for real operating environments where AI has to work across multiple domains and still remain governable.
 
 ## Why This Exists
 
@@ -39,6 +70,22 @@ This framework takes a different approach:
 3. require every subsystem to publish explicit contracts
 4. aggregate those contracts into a War Room
 5. make health, failure, and recovery visible
+
+## What You Can See In Five Minutes
+
+After bootstrap, you can open a minimal demo and immediately inspect:
+
+- a shared War Room snapshot
+- executive priorities, risks, and actions
+- subsystem status cards
+- control-plane health signals
+
+If you want to understand the framework quickly, use this flow:
+
+1. read this README
+2. open `demo/index.html`
+3. open `demo/war_room/index.html`
+4. inspect the contracts and templates behind the view
 
 ## What You Get
 
