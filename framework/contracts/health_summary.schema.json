@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "health_summary",
+  "type": "object",
+  "required": ["generated_at", "modules"],
+  "properties": {
+    "generated_at": {"type": "string"},
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["module_id", "status"],
+        "properties": {
+          "module_id": {"type": "string"},
+          "status": {"type": "string"},
+          "notes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

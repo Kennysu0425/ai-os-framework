@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "daily_summary",
+  "type": "object",
+  "required": ["subsystem_id", "title", "status", "updated_at", "highlights", "risks", "actions", "artifacts"],
+  "properties": {
+    "subsystem_id": {"type": "string"},
+    "title": {"type": "string"},
+    "status": {"type": "string", "enum": ["ready", "warning", "critical", "baseline", "missing"]},
+    "updated_at": {"type": "string"},
+    "highlights": {"type": "array", "items": {"type": "string"}},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "actions": {"type": "array", "items": {"type": "string"}},
+    "artifacts": {"type": "array", "items": {"type": "string"}},
+    "metrics": {"type": "object"}
+  }
+}

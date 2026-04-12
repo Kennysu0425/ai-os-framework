@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI OS Framework Demo</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --sub: #475569;
+      --border: #dbe3ee;
+      --accent: #4f46e5;
+      --accent-2: #06b6d4;
+      --accent-3: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(79, 70, 229, 0.12), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.10), transparent 30%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #111827, #1e293b 60%, #1d4ed8);
+      color: white;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 46px;
+      line-height: 1.05;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: #dbeafe;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: white; color: #111827; }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+    }
+    .panel h2 { margin: 0 0 10px; font-size: 24px; }
+    .panel p { color: var(--sub); line-height: 1.65; margin: 0 0 16px; }
+    .feature-list, .step-list, .paths { display: grid; gap: 12px; }
+    .feature-item, .step-item, .path-item {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fcfdff;
+    }
+    .feature-item strong, .step-item strong, .path-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+    .paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    code {
+      background: #eff6ff;
+      color: #1e3a8a;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .node {
+      border-radius: 18px;
+      padding: 16px 14px;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      min-height: 106px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.45;
+    }
+    .node.indigo { background: linear-gradient(135deg, #4338ca, #6366f1); }
+    .node.cyan { background: linear-gradient(135deg, #0891b2, #22d3ee); }
+    .node.purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+    .node.amber { background: linear-gradient(135deg, #d97706, #f59e0b); }
+    .node.slate { background: linear-gradient(135deg, #334155, #475569); }
+    .callout {
+      margin-top: 20px;
+      border-left: 4px solid var(--accent-3);
+      background: #fffaf0;
+      padding: 16px 18px;
+      border-radius: 0 16px 16px 0;
+      color: #7c2d12;
+      font-weight: 600;
+    }
+    .footer { color: var(--sub); font-size: 14px; margin-top: 24px; }
+    @media (max-width: 920px) {
+      .grid, .paths, .flow { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">AI OS Framework Demo</div>
+      <h1>Build a control plane, not just another pile of agent scripts.</h1>
+      <p>
+        This demo shows the smallest useful version of the framework: thin subsystem contracts,
+        a shared War Room snapshot, and an operator-facing surface that turns scattered signals
+        into priorities, risks, and next actions.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="war_room/index.html">Open War Room Demo</a>
+        <a class="btn btn-secondary" href="../docs/architecture-diagram.svg">View Architecture Diagram</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>What this demo proves</h2>
+        <p>
+          You can keep subsystem internals separate, publish explicit contracts, and still
+          give operators one clear place to understand what matters now.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>One control plane</strong>
+            Runtime aggregation lives in one place instead of being buried inside each subsystem.
+          </div>
+          <div class="feature-item">
+            <strong>Contract-first integration</strong>
+            Trading, knowledge, and email each publish a thin <code>daily_summary.json</code>.
+          </div>
+          <div class="feature-item">
+            <strong>War Room as the operator surface</strong>
+            The control plane turns subsystem outputs into executive priorities, risks, and actions.
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node indigo">Control Plane</div>
+          <div class="node cyan">Subsystem Contracts</div>
+          <div class="node purple">Shared Snapshot</div>
+          <div class="node amber">War Room UI</div>
+          <div class="node slate">Operator Decisions</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Quick start</h2>
+        <div class="step-list">
+          <div class="step-item">
+            <strong>1. Bootstrap the demo</strong>
+            Run <code>bash scripts/bootstrap.sh</code> or <code>make bootstrap</code>.
+          </div>
+          <div class="step-item">
+            <strong>2. Generate sample output</strong>
+            The demo writes <code>output/war_room_snapshot.json</code>.
+          </div>
+          <div class="step-item">
+            <strong>3. Open the operator view</strong>
+            Launch <code>demo/war_room/index.html</code> in your browser.
+          </div>
+        </div>
+        <div class="callout">
+          This is intentionally small. The goal is to show the operating model clearly before
+          you add real runtimes, schedulers, or host-specific adapters.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What to open next</h2>
+      <div class="paths">
+        <div class="path-item">
+          <strong>Architecture</strong>
+          Start with <code>docs/architecture-diagram.svg</code> and <code>docs/architecture.md</code>.
+        </div>
+        <div class="path-item">
+          <strong>Contracts</strong>
+          Review <code>framework/contracts/</code> and the example subsystem exports.
+        </div>
+        <div class="path-item">
+          <strong>War Room</strong>
+          Open <code>demo/war_room/index.html</code> to see how the control plane reads the snapshot.
+        </div>
+      </div>
+      <div class="footer">
+        Repo entry flow: README → Demo landing page → War Room demo → Contracts → Templates.
+      </div>
+    </section>
+  </div>
+</body>
+</html>

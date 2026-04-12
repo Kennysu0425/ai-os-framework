@@ -1,0 +1,47 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="24" fill="#FBFDFF"/>
+  <rect x="360" y="60" width="560" height="90" rx="18" fill="#D9F2E6" stroke="#7BB892" stroke-width="3"/>
+  <text x="640" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#102A43">Control Plane</text>
+  <text x="640" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#486581">modules, boundaries, contracts, health rules</text>
+
+  <rect x="330" y="210" width="620" height="88" rx="18" fill="#E8F1FB" stroke="#8FB3D9" stroke-width="3"/>
+  <text x="640" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#102A43">Control-Plane Runtime</text>
+  <text x="640" y="276" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#486581">aggregation, health, orchestration, War Room build</text>
+
+  <rect x="70" y="400" width="210" height="92" rx="16" fill="#FFF7E6" stroke="#D9B85F" stroke-width="3"/>
+  <text x="175" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#102A43">Trading</text>
+  <text x="175" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">domain runtime</text>
+
+  <rect x="315" y="400" width="210" height="92" rx="16" fill="#FFF7E6" stroke="#D9B85F" stroke-width="3"/>
+  <text x="420" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#102A43">CRM</text>
+  <text x="420" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">domain runtime</text>
+
+  <rect x="560" y="400" width="210" height="92" rx="16" fill="#FFF7E6" stroke="#D9B85F" stroke-width="3"/>
+  <text x="665" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#102A43">Email</text>
+  <text x="665" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">domain runtime</text>
+
+  <rect x="805" y="400" width="210" height="92" rx="16" fill="#F4ECFF" stroke="#A98AD1" stroke-width="3"/>
+  <text x="910" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#102A43">Knowledge</text>
+  <text x="910" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">memory / summary</text>
+
+  <rect x="1050" y="400" width="160" height="92" rx="16" fill="#F4ECFF" stroke="#A98AD1" stroke-width="3"/>
+  <text x="1130" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#102A43">Twin</text>
+  <text x="1130" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">company state</text>
+
+  <rect x="385" y="580" width="510" height="82" rx="16" fill="#FFF3F3" stroke="#D9A5A5" stroke-width="3"/>
+  <text x="640" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#102A43">War Room / Operator View</text>
+  <text x="640" y="642" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#486581">priorities, risks, health, next actions</text>
+
+  <line x1="640" y1="150" x2="640" y2="210" stroke="#94A3B8" stroke-width="4"/>
+  <line x1="640" y1="298" x2="175" y2="400" stroke="#94A3B8" stroke-width="3"/>
+  <line x1="640" y1="298" x2="420" y2="400" stroke="#94A3B8" stroke-width="3"/>
+  <line x1="640" y1="298" x2="665" y2="400" stroke="#94A3B8" stroke-width="3"/>
+  <line x1="640" y1="298" x2="910" y2="400" stroke="#94A3B8" stroke-width="3"/>
+  <line x1="640" y1="298" x2="1130" y2="400" stroke="#94A3B8" stroke-width="3"/>
+
+  <line x1="175" y1="492" x2="495" y2="580" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="420" y1="492" x2="560" y2="580" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="665" y1="492" x2="640" y2="580" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="910" y1="492" x2="730" y2="580" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="1130" y1="492" x2="785" y2="580" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 6"/>
+</svg>

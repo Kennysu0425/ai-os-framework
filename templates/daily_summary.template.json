@@ -1,0 +1,13 @@
+{
+  "subsystem_id": "example_subsystem",
+  "title": "Example Subsystem",
+  "status": "ready",
+  "updated_at": "2026-01-01T09:00:00+08:00",
+  "highlights": ["Top highlight"],
+  "risks": ["Top risk"],
+  "actions": ["Top next action"],
+  "artifacts": ["reports/example.md"],
+  "metrics": {
+    "items": 3
+  }
+}

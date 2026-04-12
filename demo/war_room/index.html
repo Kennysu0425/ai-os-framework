@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI OS Framework Demo War Room</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #102a43;
+      --sub: #486581;
+      --border: #d9e2ec;
+      --ready: #1f9d55;
+      --warning: #d69e2e;
+      --critical: #e53e3e;
+      --accent: #4f46e5;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #eef2ff, #ecfeff);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 38px; }
+    .hero p { margin: 0; color: var(--sub); font-size: 18px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+    }
+    .panel h2, .panel h3 { margin-top: 0; }
+    .metric {
+      font-size: 34px;
+      font-weight: 700;
+      margin: 8px 0 4px;
+    }
+    .sub {
+      color: var(--sub);
+      font-size: 14px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .agent-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .agent-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .status.ready { background: #edfdf3; color: var(--ready); }
+    .status.warning { background: #fff8eb; color: var(--warning); }
+    .status.critical { background: #fff1f1; color: var(--critical); }
+    ul { padding-left: 18px; }
+    li { margin: 6px 0; }
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .footer-note {
+      color: var(--sub);
+      font-size: 13px;
+      margin-top: 16px;
+    }
+    @media (max-width: 900px) {
+      .grid, .two-col, .agent-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../index.html">&larr; Back to Demo Landing Page</a>
+      <a href="../../docs/architecture-diagram.svg">Open Architecture Diagram</a>
+    </div>
+    <div class="hero">
+      <h1>AI OS Framework Demo War Room</h1>
+      <p>A minimal operator view that consumes subsystem contracts and turns them into priorities, risks, and next actions.</p>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="sub">Overall Status</div>
+        <div class="metric" id="overall-status">-</div>
+        <div class="sub">Control-plane reading</div>
+      </div>
+      <div class="panel">
+        <div class="sub">Top Priorities</div>
+        <div class="metric" id="priority-count">-</div>
+        <div class="sub">Executive focus items</div>
+      </div>
+      <div class="panel">
+        <div class="sub">Top Risks</div>
+        <div class="metric" id="risk-count">-</div>
+        <div class="sub">Cross-subsystem risk signals</div>
+      </div>
+      <div class="panel">
+        <div class="sub">Agents</div>
+        <div class="metric" id="agent-count">-</div>
+        <div class="sub">Subsystem summaries loaded</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <h2>Executive Reading</h2>
+        <h3>Top Priorities</h3>
+        <ul id="priorities"></ul>
+        <h3>Top Risks</h3>
+        <ul id="risks"></ul>
+        <h3>Top Actions</h3>
+        <ul id="actions"></ul>
+      </div>
+
+      <div class="panel">
+        <h2>Control Plane Health</h2>
+        <ul id="health"></ul>
+        <div class="footer-note">
+          Source file: <code>output/war_room_snapshot.json</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Subsystem Agents</h2>
+      <div class="agent-list" id="agents"></div>
+    </div>
+  </div>
+
+  <script>
+    const statusClass = (status) => {
+      if (status === 'ready') return 'ready';
+      if (status === 'critical') return 'critical';
+      return 'warning';
+    };
+
+    fetch('../../output/war_room_snapshot.json')
+      .then((r) => r.json())
+      .then((data) => {
+        document.getElementById('overall-status').textContent = data.overall_status || 'unknown';
+        document.getElementById('priority-count').textContent = (data.executive?.top_priorities || []).length;
+        document.getElementById('risk-count').textContent = (data.executive?.top_risks || []).length;
+        document.getElementById('agent-count').textContent = (data.agents || []).length;
+
+        const priorities = document.getElementById('priorities');
+        const risks = document.getElementById('risks');
+        const actions = document.getElementById('actions');
+        const health = document.getElementById('health');
+        const agents = document.getElementById('agents');
+
+        (data.executive?.top_priorities || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          priorities.appendChild(li);
+        });
+
+        (data.executive?.top_risks || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          risks.appendChild(li);
+        });
+
+        (data.executive?.top_actions || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          actions.appendChild(li);
+        });
+
+        Object.entries(data.control_plane?.health || {}).forEach(([key, value]) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${key}</strong>: ${value}`;
+          health.appendChild(li);
+        });
+
+        (data.agents || []).forEach((agent) => {
+          const card = document.createElement('div');
+          card.className = 'agent-card';
+          card.innerHTML = `
+            <div class="status ${statusClass(agent.status)}">${agent.status || 'unknown'}</div>
+            <h3>${agent.title || agent.subsystem_id || agent.id || 'Agent'}</h3>
+            <div class="sub">Updated: ${agent.updated_at || 'n/a'}</div>
+            <p><strong>Highlights</strong></p>
+            <ul>${(agent.highlights || []).map((x) => `<li>${x}</li>`).join('')}</ul>
+            <p><strong>Risks</strong></p>
+            <ul>${(agent.risks || []).map((x) => `<li>${x}</li>`).join('')}</ul>
+            <p><strong>Actions</strong></p>
+            <ul>${(agent.actions || []).map((x) => `<li>${x}</li>`).join('')}</ul>
+          `;
+          agents.appendChild(card);
+        });
+      })
+      .catch((err) => {
+        document.body.innerHTML = '<div style="max-width:960px;margin:60px auto;font-family:Arial,sans-serif;"><h1>Failed to load demo snapshot</h1><p>Run <code>python3 scripts/build_demo_war_room_snapshot.py</code> first.</p><pre>' + String(err) + '</pre></div>';
+      });
+  </script>
+</body>
+</html>

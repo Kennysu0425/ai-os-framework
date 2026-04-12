@@ -1,0 +1,11 @@
+{
+  "subsystem_id": "email",
+  "title": "Email Subsystem",
+  "status": "warning",
+  "updated_at": "2026-01-01T09:00:00+08:00",
+  "highlights": ["12 pending replies"],
+  "risks": ["4 overdue threads"],
+  "actions": ["Review priority replies first"],
+  "artifacts": ["reports/email_dashboard.html"],
+  "metrics": {"pending_replies": 12, "overdue_threads": 4}
+}

@@ -1,0 +1,11 @@
+{
+  "subsystem_id": "knowledge",
+  "title": "Knowledge Subsystem",
+  "status": "ready",
+  "updated_at": "2026-01-01T09:00:00+08:00",
+  "highlights": ["3 high-signal items promoted"],
+  "risks": ["None"],
+  "actions": ["Review promoted knowledge candidates"],
+  "artifacts": ["exports/daily_summary.json"],
+  "metrics": {"promoted_items": 3}
+}

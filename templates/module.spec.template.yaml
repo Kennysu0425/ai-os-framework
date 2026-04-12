@@ -1,0 +1,11 @@
+module_id: MXX_example
+name: Example Module
+layer: control_plane
+purpose: Describe what this module does
+inputs:
+  - source_a
+  - source_b
+outputs:
+  - report.md
+status: draft
+promotion_candidate: false

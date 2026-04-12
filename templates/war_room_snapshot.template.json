@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-01-01T09:05:00+08:00",
+  "overall_status": "warning",
+  "executive": {
+    "top_priorities": ["Priority A"],
+    "top_risks": ["Risk A"],
+    "top_actions": ["Action A"]
+  },
+  "control_plane": {
+    "health": {
+      "telegram": "healthy"
+    }
+  },
+  "agents": [
+    {
+      "id": "example_subsystem",
+      "status": "ready",
+      "highlights": ["Top highlight"]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "war_room_snapshot",
+  "type": "object",
+  "required": ["generated_at", "overall_status", "executive", "agents", "control_plane"],
+  "properties": {
+    "generated_at": {"type": "string"},
+    "overall_status": {"type": "string"},
+    "executive": {"type": "object"},
+    "control_plane": {"type": "object"},
+    "agents": {"type": "array", "items": {"type": "object"}}
+  }
+}

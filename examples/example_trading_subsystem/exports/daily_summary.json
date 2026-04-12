@@ -1,0 +1,11 @@
+{
+  "subsystem_id": "trading",
+  "title": "Trading Subsystem",
+  "status": "warning",
+  "updated_at": "2026-01-01T09:00:00+08:00",
+  "highlights": ["BTC intraday monitor is active"],
+  "risks": ["Market structure is unstable"],
+  "actions": ["Review readiness before execution"],
+  "artifacts": ["reports/trading_dashboard.html"],
+  "metrics": {"watchlist": 4}
+}
