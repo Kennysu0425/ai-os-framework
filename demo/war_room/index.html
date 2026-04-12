@@ -181,70 +181,182 @@
   </div>
 
   <script>
-    const statusClass = (status) => {
+    // FALLBACK_DATA_START
+    var FALLBACK_DATA = {
+      "generated_at": "2026-01-01T09:30:00+08:00",
+      "overall_status": "warning",
+      "executive": {
+        "top_priorities": [
+          "Review subsystem warnings"
+        ],
+        "top_risks": [
+          "Queue pressure in email",
+          "Trading instability"
+        ],
+        "top_actions": [
+          "Review priority replies",
+          "Review trading readiness"
+        ]
+      },
+      "control_plane": {
+        "health": {
+          "telegram": "healthy",
+          "scheduler": "healthy"
+        }
+      },
+      "agents": [
+        {
+          "subsystem_id": "trading",
+          "title": "Trading Subsystem",
+          "status": "warning",
+          "updated_at": "2026-01-01T09:00:00+08:00",
+          "highlights": [
+            "BTC intraday monitor is active"
+          ],
+          "risks": [
+            "Market structure is unstable"
+          ],
+          "actions": [
+            "Review readiness before execution"
+          ],
+          "artifacts": [
+            "reports/trading_dashboard.html"
+          ],
+          "metrics": {
+            "watchlist": 4
+          }
+        },
+        {
+          "subsystem_id": "knowledge",
+          "title": "Knowledge Subsystem",
+          "status": "ready",
+          "updated_at": "2026-01-01T09:00:00+08:00",
+          "highlights": [
+            "3 high-signal items promoted"
+          ],
+          "risks": [
+            "None"
+          ],
+          "actions": [
+            "Review promoted knowledge candidates"
+          ],
+          "artifacts": [
+            "exports/daily_summary.json"
+          ],
+          "metrics": {
+            "promoted_items": 3
+          }
+        },
+        {
+          "subsystem_id": "email",
+          "title": "Email Subsystem",
+          "status": "warning",
+          "updated_at": "2026-01-01T09:00:00+08:00",
+          "highlights": [
+            "12 pending replies"
+          ],
+          "risks": [
+            "4 overdue threads"
+          ],
+          "actions": [
+            "Review priority replies first"
+          ],
+          "artifacts": [
+            "reports/email_dashboard.html"
+          ],
+          "metrics": {
+            "pending_replies": 12,
+            "overdue_threads": 4
+          }
+        }
+      ]
+    };
+    // FALLBACK_DATA_END
+
+    var statusClass = function (status) {
       if (status === 'ready') return 'ready';
       if (status === 'critical') return 'critical';
       return 'warning';
     };
 
-    fetch('../../output/war_room_snapshot.json')
-      .then((r) => r.json())
-      .then((data) => {
-        document.getElementById('overall-status').textContent = data.overall_status || 'unknown';
-        document.getElementById('priority-count').textContent = (data.executive?.top_priorities || []).length;
-        document.getElementById('risk-count').textContent = (data.executive?.top_risks || []).length;
-        document.getElementById('agent-count').textContent = (data.agents || []).length;
+    function render(data) {
+      document.getElementById('overall-status').textContent = data.overall_status || 'unknown';
+      document.getElementById('priority-count').textContent = (data.executive?.top_priorities || []).length;
+      document.getElementById('risk-count').textContent = (data.executive?.top_risks || []).length;
+      document.getElementById('agent-count').textContent = (data.agents || []).length;
 
-        const priorities = document.getElementById('priorities');
-        const risks = document.getElementById('risks');
-        const actions = document.getElementById('actions');
-        const health = document.getElementById('health');
-        const agents = document.getElementById('agents');
+      var priorities = document.getElementById('priorities');
+      var risks = document.getElementById('risks');
+      var actions = document.getElementById('actions');
+      var health = document.getElementById('health');
+      var agents = document.getElementById('agents');
 
-        (data.executive?.top_priorities || []).forEach((item) => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          priorities.appendChild(li);
-        });
-
-        (data.executive?.top_risks || []).forEach((item) => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          risks.appendChild(li);
-        });
-
-        (data.executive?.top_actions || []).forEach((item) => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          actions.appendChild(li);
-        });
-
-        Object.entries(data.control_plane?.health || {}).forEach(([key, value]) => {
-          const li = document.createElement('li');
-          li.innerHTML = `<strong>${key}</strong>: ${value}`;
-          health.appendChild(li);
-        });
-
-        (data.agents || []).forEach((agent) => {
-          const card = document.createElement('div');
-          card.className = 'agent-card';
-          card.innerHTML = `
-            <div class="status ${statusClass(agent.status)}">${agent.status || 'unknown'}</div>
-            <h3>${agent.title || agent.subsystem_id || agent.id || 'Agent'}</h3>
-            <div class="sub">Updated: ${agent.updated_at || 'n/a'}</div>
-            <p><strong>Highlights</strong></p>
-            <ul>${(agent.highlights || []).map((x) => `<li>${x}</li>`).join('')}</ul>
-            <p><strong>Risks</strong></p>
-            <ul>${(agent.risks || []).map((x) => `<li>${x}</li>`).join('')}</ul>
-            <p><strong>Actions</strong></p>
-            <ul>${(agent.actions || []).map((x) => `<li>${x}</li>`).join('')}</ul>
-          `;
-          agents.appendChild(card);
-        });
-      })
-      .catch((err) => {
-        document.body.innerHTML = '<div style="max-width:960px;margin:60px auto;font-family:Arial,sans-serif;"><h1>Failed to load demo snapshot</h1><p>Run <code>python3 scripts/build_demo_war_room_snapshot.py</code> first.</p><pre>' + String(err) + '</pre></div>';
+      (data.executive?.top_priorities || []).forEach(function (item) {
+        var li = document.createElement('li');
+        li.textContent = item;
+        priorities.appendChild(li);
       });
+
+      (data.executive?.top_risks || []).forEach(function (item) {
+        var li = document.createElement('li');
+        li.textContent = item;
+        risks.appendChild(li);
+      });
+
+      (data.executive?.top_actions || []).forEach(function (item) {
+        var li = document.createElement('li');
+        li.textContent = item;
+        actions.appendChild(li);
+      });
+
+      Object.entries(data.control_plane?.health || {}).forEach(function ([key, value]) {
+        var li = document.createElement('li');
+        li.innerHTML = '<strong>' + key + '</strong>: ' + value;
+        health.appendChild(li);
+      });
+
+      (data.agents || []).forEach(function (agent) {
+        var card = document.createElement('div');
+        card.className = 'agent-card';
+        card.innerHTML =
+          '<div class="status ' + statusClass(agent.status) + '">' + (agent.status || 'unknown') + '</div>' +
+          '<h3>' + (agent.title || agent.subsystem_id || 'Agent') + '</h3>' +
+          '<div class="sub">Updated: ' + (agent.updated_at || 'n/a') + '</div>' +
+          '<p><strong>Highlights</strong></p>' +
+          '<ul>' + (agent.highlights || []).map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+          '<p><strong>Risks</strong></p>' +
+          '<ul>' + (agent.risks || []).map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+          '<p><strong>Actions</strong></p>' +
+          '<ul>' + (agent.actions || []).map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+        agents.appendChild(card);
+      });
+    }
+
+    if (window.location.protocol === 'file:') {
+      if (FALLBACK_DATA && FALLBACK_DATA.generated_at) {
+        render(FALLBACK_DATA);
+      } else {
+        document.body.innerHTML =
+          '<div style="max-width:960px;margin:60px auto;font-family:Arial,sans-serif;">' +
+          '<h1>No embedded demo data</h1>' +
+          '<p>Run <code>make bootstrap</code> to generate demo data, then reopen this file.</p></div>';
+      }
+    } else {
+      fetch('../../output/war_room_snapshot.json')
+        .then(function (r) { return r.json(); })
+        .then(render)
+        .catch(function (err) {
+          if (FALLBACK_DATA && FALLBACK_DATA.generated_at) {
+            render(FALLBACK_DATA);
+          } else {
+            document.body.innerHTML =
+              '<div style="max-width:960px;margin:60px auto;font-family:Arial,sans-serif;">' +
+              '<h1>Failed to load demo snapshot</h1>' +
+              '<p>Run <code>make bootstrap</code> first.</p>' +
+              '<pre>' + String(err) + '</pre></div>';
+          }
+        });
+    }
   </script>
 </body>
 </html>

@@ -150,6 +150,9 @@ python3 scripts/build_demo_war_room_snapshot.py
 python3 scripts/validate_contracts.py
 ```
 
+> **Note:** Core setup requires only Python 3 standard library.
+> Image generation scripts require Pillow: `pip install -r requirements-images.txt`
+
 Then open:
 
 - `demo/index.html`
@@ -253,11 +256,4 @@ Apache-2.0
 
 ## Contributing
 
-Contributions are welcome if they improve:
-
-- control-plane clarity
-- contract quality
-- subsystem patterns
-- portability
-- observability
-- demo usability
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions, how to add subsystems, and PR guidelines.
