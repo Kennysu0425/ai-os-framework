@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:
+    raise SystemExit(
+        "Pillow is required for image generation.\n"
+        "Install it with: pip install -r requirements-images.txt"
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]

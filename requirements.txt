@@ -1,1 +1,4 @@
-Pillow>=10.0
+# Core dependencies: none (stdlib only)
+#
+# For image generation scripts (generate_demo_hero.py, generate_showcase_assets.py):
+#   pip install -r requirements-images.txt

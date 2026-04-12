@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: bootstrap demo validate clean
+.PHONY: bootstrap demo validate images serve clean
 
 bootstrap:
 	bash scripts/bootstrap.sh
@@ -11,6 +11,14 @@ demo:
 
 validate:
 	$(PYTHON) scripts/validate_contracts.py
+
+images:
+	$(PYTHON) scripts/generate_demo_hero.py
+	$(PYTHON) scripts/generate_showcase_assets.py
+
+serve:
+	@echo "Serving at http://localhost:8000"
+	$(PYTHON) -m http.server 8000
 
 clean:
 	rm -rf output

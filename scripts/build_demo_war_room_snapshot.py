@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -30,8 +31,30 @@ snapshot = {
     'agents': agents,
 }
 
+snapshot_json = json.dumps(snapshot, ensure_ascii=False, indent=2)
+
+# Write the JSON file
 out_dir = root / 'output'
 out_dir.mkdir(exist_ok=True)
 out = out_dir / 'war_room_snapshot.json'
-out.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2))
+out.write_text(snapshot_json)
 print(out)
+
+# Inject fallback data into the War Room demo HTML
+html_path = root / 'demo' / 'war_room' / 'index.html'
+if html_path.exists():
+    html = html_path.read_text()
+    replacement = (
+        '// FALLBACK_DATA_START\n'
+        '    var FALLBACK_DATA = ' + json.dumps(snapshot, ensure_ascii=False, indent=2).replace('\n', '\n    ') + ';\n'
+        '    // FALLBACK_DATA_END'
+    )
+    updated = re.sub(
+        r'// FALLBACK_DATA_START\n.*?// FALLBACK_DATA_END',
+        replacement,
+        html,
+        flags=re.DOTALL,
+    )
+    if updated != html:
+        html_path.write_text(updated)
+        print(f"Injected fallback data into {html_path}")

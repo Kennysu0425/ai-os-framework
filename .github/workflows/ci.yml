@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate contracts
+        run: python3 scripts/validate_contracts.py
+
+      - name: Build War Room snapshot
+        run: python3 scripts/build_demo_war_room_snapshot.py
+
+      - name: Validate snapshot schema
+        run: python3 scripts/validate_snapshot_schema.py
