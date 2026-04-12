@@ -1,5 +1,7 @@
 # ai-os-framework
 
+![AI OS Framework Hero](docs/demo-hero.png)
+
 Build your own AI Operating System with:
 
 - one control plane
@@ -9,6 +11,8 @@ Build your own AI Operating System with:
 - health, observability, and recovery primitives
 
 `ai-os-framework` is an open-source starter kit for builders who want something more structured than a collection of prompts, scripts, and agent sessions.
+
+It is especially useful for founders, operators, and technical leaders who want AI systems that are understandable at the management layer, not just impressive at the prompt layer.
 
 It is designed for systems that need to be:
 
@@ -44,6 +48,7 @@ This framework takes a different approach:
 - example subsystem outputs
 - a demo War Room snapshot builder
 - a minimal dashboard / War Room HTML demo
+- a visual demo landing page for executive-facing walkthroughs
 - a bootstrap script for first-time setup
 
 ## Architecture At A Glance
