@@ -3,7 +3,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 
-ROOT = Path("/Users/kenny/Desktop/ai-os-framework")
+ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "demo-hero.png"
 
 W, H = 1600, 900
@@ -27,15 +27,27 @@ def find_font(candidates):
 
 FONT_PATH = find_font(
     [
+        # macOS
         "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
         "/System/Library/Fonts/Supplemental/Arial.ttf",
         "/Library/Fonts/Arial.ttf",
+        # Linux
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        # Windows
+        "C:/Windows/Fonts/arial.ttf",
     ]
 )
 BOLD_PATH = find_font(
     [
+        # macOS
         "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
         "/Library/Fonts/Arial Bold.ttf",
+        # Linux
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        # Windows
+        "C:/Windows/Fonts/arialbd.ttf",
         FONT_PATH,
     ]
 )
