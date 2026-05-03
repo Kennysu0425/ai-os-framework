@@ -135,6 +135,8 @@ ai-os-framework/
 ├─ framework/
 │  ├─ control_plane/
 │  ├─ contracts/
+│  ├─ adapters/      # how runtimes / tools / agents plug in
+│  ├─ auditors/      # control-plane modules that audit the AI OS
 │  ├─ health/
 │  ├─ war_room/
 │  └─ automations/
@@ -142,11 +144,22 @@ ai-os-framework/
 ├─ examples/
 │  ├─ example_trading_subsystem/
 │  ├─ example_knowledge_subsystem/
-│  └─ example_email_subsystem/
+│  ├─ example_email_subsystem/
+│  └─ example_auditor_module/
 ├─ scripts/
 ├─ Makefile
 └─ .env.example
 ```
+
+## Runtime Agnostic By Design
+
+Subsystems can be Python scripts, Node services, n8n workflows, Claude Code skills, or webhook handlers — anything that can produce a contract-compliant `daily_summary.json`. See [framework/adapters/](framework/adapters/) for the adapter pattern and how to plug in your own runtime, data source, or agent.
+
+## Built For Self-Host First, Commercial-Ready
+
+This framework is designed for SMB founders, operators, and individual builders who want to self-host an AI operating layer today.
+
+The contract schemas also reserve optional fields (`tenant_id`, `policy_id`, `audience`, `data_classification`, `provenance`) for future multi-tenant, RBAC, and compliance layers. Self-host users can ignore them — they have no effect on single-org deployments.
 
 ## Quickstart
 
@@ -221,6 +234,7 @@ Recommended flow:
 - example trading subsystem
 - example knowledge subsystem
 - example email subsystem
+- example auditor module (provenance auditor)
 
 ## Origin
 
@@ -260,6 +274,7 @@ Use this framework to:
 ## Docs
 
 - `docs/architecture.md`
+- `docs/event-model.md`
 - `docs/module-model.md`
 - `docs/subsystem-model.md`
 - `docs/contract-model.md`

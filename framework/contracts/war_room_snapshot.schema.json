@@ -8,6 +8,32 @@
     "overall_status": {"type": "string"},
     "executive": {"type": "object"},
     "control_plane": {"type": "object"},
-    "agents": {"type": "array", "items": {"type": "object"}}
+    "agents": {"type": "array", "items": {"type": "object"}},
+
+    "tenant_id": {
+      "type": "string",
+      "description": "Optional. Reserved for multi-tenant deployments."
+    },
+    "policy_id": {
+      "type": "string",
+      "description": "Optional. Access policy reference for Pro/RBAC layers."
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["executive", "operator", "auditor"],
+      "description": "Optional. Default audience this snapshot is built for."
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential", "restricted"]
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "generated_by": {"type": "string"},
+        "model": {"type": "string"},
+        "inputs_hash": {"type": "string"}
+      }
+    }
   }
 }
