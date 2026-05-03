@@ -238,7 +238,7 @@ Recommended flow:
 
 ## Origin
 
-This project was created by [Kenny Su](https://www.kdan.com/leadership), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/).
+This project was created by [Kenny Su](https://www.linkedin.com/in/kenny-su/), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/).
 
 It comes from an internal AI OS design effort exploring how executives, operators, and technical teams can coordinate multiple AI agents without losing visibility, context, or control.
 
