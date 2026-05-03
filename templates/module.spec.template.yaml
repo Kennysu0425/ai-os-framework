@@ -1,11 +1,94 @@
-module_id: MXX_example
+# Module Spec Template
+# Every field except "Required" ones can be omitted on day one.
+# Start small. Add fields as your module grows.
+
+# === Identity (Required) ===
+module_id: MXX_example_module
 name: Example Module
-layer: control_plane
-purpose: Describe what this module does
+version: v0.1
+status: draft  # draft | active | deprecated
+
+# === Scope ===
+layer: control_plane  # control_plane | subsystem | auditor
+zone: ""              # optional grouping label, e.g. "Operations" or "Knowledge"
+purpose: One sentence describing the business outcome.
+
+# === Runtime Adapter ===
+# Tells the control plane HOW this module runs.
+# The framework is runtime-agnostic — pick what fits.
+runtime: python  # python | node | shell | n8n | claude_code | webhook | external
+
+# === Inputs (data sources this module reads) ===
 inputs:
-  - source_a
-  - source_b
+  - name: primary_source
+    type: folder    # folder | file | sheet | api | mcp | env
+    required: true
+    path_or_endpoint: ""
+
+# === Trigger (when this module runs) ===
+trigger:
+  mode: scheduled   # scheduled | manual | event
+  schedule_local: ""  # cron expression or human time, e.g. "weekday 21:00"
+
+# === Agent / Prompt Block (only if module uses an LLM) ===
+agent_prompt:
+  system_goal: ""
+  rules:
+    - Respect workspace boundary
+    - Avoid exposing raw secrets
+  output_contract:
+    format: json    # markdown | json | csv
+    sections:
+      - summary
+      - actions
+      - risks
+
+# === Actions (what this module does as side effects) ===
+actions:
+  - name: write_report
+    type: file_write
+    target: output/reports
+  - name: notify
+    type: telegram  # telegram | slack | email | webhook | none
+    target: ""
+
+# === Outputs (what this module publishes) ===
 outputs:
-  - report.md
-status: draft
-promotion_candidate: false
+  daily_summary: exports/daily_summary.json
+  report_path: ""
+
+# === SLA ===
+sla:
+  max_latency_minutes: 15
+  on_failure: retry_once_then_alert  # retry_once_then_alert | alert_only | silent
+
+# === Security ===
+security:
+  credential_scope: module_isolated  # module_isolated | shared | read_only
+  pii_policy: masked                 # masked | hashed | redacted | none
+
+# === Observability ===
+observability:
+  log_path: output/logs
+  metrics:
+    - success_rate
+    - runtime_seconds
+    - token_cost
+
+# === Commercial / Multi-tenant Hooks (optional, leave blank for self-host) ===
+# These are reserved for future Pro / multi-tenant deployments.
+# Leave them empty for personal or single-org use — they have no effect.
+tenant_id: ""              # populated by Pro / multi-tenant runtime
+policy_id: ""              # references an access / data policy
+audience: operator         # executive | operator | auditor — who reads the output
+data_classification: internal  # public | internal | confidential | restricted
+provenance:
+  generated_by: ""         # module that produced this (usually module_id)
+  model: ""                # e.g. "claude-sonnet-4" — for AI transparency
+  inputs_hash: ""          # optional, for caching / dedup
+
+# === Promotion ===
+promotion_candidate: false  # set true when this module should become its own subsystem
+
+# === Extension ===
+ext_json: {}                # free-form for module-specific config

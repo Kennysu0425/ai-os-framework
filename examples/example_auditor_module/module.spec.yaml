@@ -1,0 +1,51 @@
+module_id: A01_provenance_auditor
+name: Provenance Auditor
+version: v0.1
+status: active
+layer: auditor
+zone: Control_Plane
+purpose: Verify every subsystem summary includes provenance metadata for AI transparency.
+
+runtime: python
+
+inputs:
+  - name: subsystem_exports
+    type: folder
+    required: true
+    path_or_endpoint: examples/*/exports/daily_summary.json
+
+trigger:
+  mode: scheduled
+  schedule_local: weekday 09:15
+
+actions:
+  - name: write_report
+    type: file_write
+    target: reports/auditor
+  - name: notify
+    type: none
+    target: ""
+
+outputs:
+  daily_summary: exports/daily_summary.json
+
+sla:
+  max_latency_minutes: 5
+  on_failure: alert_only
+
+security:
+  credential_scope: read_only
+  pii_policy: none
+
+observability:
+  log_path: output/logs
+  metrics:
+    - subsystems_checked
+    - findings
+
+audience: auditor
+data_classification: internal
+provenance:
+  generated_by: A01_provenance_auditor
+  model: ""
+  inputs_hash: ""

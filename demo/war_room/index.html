@@ -187,15 +187,18 @@
       "overall_status": "warning",
       "executive": {
         "top_priorities": [
-          "Review subsystem warnings"
+          "Review subsystem warnings",
+          "Address auditor findings"
         ],
         "top_risks": [
           "Queue pressure in email",
-          "Trading instability"
+          "Trading instability",
+          "Missing AI provenance metadata"
         ],
         "top_actions": [
           "Review priority replies",
-          "Review trading readiness"
+          "Review trading readiness",
+          "Add provenance to flagged subsystems"
         ]
       },
       "control_plane": {
@@ -267,6 +270,39 @@
           "metrics": {
             "pending_replies": 12,
             "overdue_threads": 4
+          }
+        },
+        {
+          "subsystem_id": "auditor_provenance",
+          "title": "Provenance Auditor",
+          "status": "warning",
+          "updated_at": "2026-01-01T09:15:00+08:00",
+          "highlights": [
+            "Checked 3 subsystem exports for provenance metadata",
+            "trading and email subsystems pass basic structure checks"
+          ],
+          "risks": [
+            "knowledge subsystem export missing provenance.model field",
+            "trading subsystem export missing provenance.generated_by field"
+          ],
+          "actions": [
+            "Add provenance block to knowledge subsystem export",
+            "Add provenance block to trading subsystem export"
+          ],
+          "artifacts": [
+            "reports/auditor/provenance_findings.md"
+          ],
+          "metrics": {
+            "subsystems_checked": 3,
+            "findings": 2,
+            "severity": "warning"
+          },
+          "audience": "auditor",
+          "data_classification": "internal",
+          "provenance": {
+            "generated_by": "example_auditor_module",
+            "model": "",
+            "inputs_hash": ""
           }
         }
       ]

@@ -8,6 +8,7 @@ examples = [
     root / 'examples' / 'example_trading_subsystem' / 'exports' / 'daily_summary.json',
     root / 'examples' / 'example_knowledge_subsystem' / 'exports' / 'daily_summary.json',
     root / 'examples' / 'example_email_subsystem' / 'exports' / 'daily_summary.json',
+    root / 'examples' / 'example_auditor_module' / 'exports' / 'daily_summary.json',
 ]
 
 agents = []
@@ -18,9 +19,9 @@ snapshot = {
     'generated_at': '2026-01-01T09:30:00+08:00',
     'overall_status': 'warning',
     'executive': {
-        'top_priorities': ['Review subsystem warnings'],
-        'top_risks': ['Queue pressure in email', 'Trading instability'],
-        'top_actions': ['Review priority replies', 'Review trading readiness']
+        'top_priorities': ['Review subsystem warnings', 'Address auditor findings'],
+        'top_risks': ['Queue pressure in email', 'Trading instability', 'Missing AI provenance metadata'],
+        'top_actions': ['Review priority replies', 'Review trading readiness', 'Add provenance to flagged subsystems']
     },
     'control_plane': {
         'health': {

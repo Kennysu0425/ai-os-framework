@@ -12,6 +12,34 @@
     "risks": {"type": "array", "items": {"type": "string"}},
     "actions": {"type": "array", "items": {"type": "string"}},
     "artifacts": {"type": "array", "items": {"type": "string"}},
-    "metrics": {"type": "object"}
+    "metrics": {"type": "object"},
+
+    "tenant_id": {
+      "type": "string",
+      "description": "Optional. Reserved for multi-tenant deployments. Empty or absent for single-tenant / self-host."
+    },
+    "policy_id": {
+      "type": "string",
+      "description": "Optional. References an access/data policy. Used by Pro/RBAC layers."
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["executive", "operator", "auditor"],
+      "description": "Optional. Hints which reader this summary is intended for."
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential", "restricted"],
+      "description": "Optional. Default 'internal' if absent."
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Optional. Records how this summary was generated for AI transparency and audit.",
+      "properties": {
+        "generated_by": {"type": "string"},
+        "model": {"type": "string"},
+        "inputs_hash": {"type": "string"}
+      }
+    }
   }
 }

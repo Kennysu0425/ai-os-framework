@@ -16,6 +16,25 @@
           "notes": {"type": "array", "items": {"type": "string"}}
         }
       }
+    },
+
+    "tenant_id": {"type": "string"},
+    "policy_id": {"type": "string"},
+    "audience": {
+      "type": "string",
+      "enum": ["executive", "operator", "auditor"]
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential", "restricted"]
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "generated_by": {"type": "string"},
+        "model": {"type": "string"},
+        "inputs_hash": {"type": "string"}
+      }
     }
   }
 }
