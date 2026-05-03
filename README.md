@@ -17,7 +17,7 @@ Far fewer can answer the operational questions that matter:
 `ai-os-framework` is an open-source starter kit for building an AI operating layer:
 one control plane, many domain subsystems, explicit contracts, and an executive War Room.
 
-Created by [Kenny Su](https://www.kdan.com/leadership), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/), this project comes from a private AI OS design effort across knowledge, trading, CRM, email, content, and company-state workflows.
+Created by [Kenny Su](https://www.linkedin.com/in/kenny-su/), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/), this project comes from a private AI OS design effort across knowledge, trading, CRM, email, content, and company-state workflows.
 
 The public repo does not contain private data or company-specific runtime logic.
 It exposes the reusable framework: control-plane design, subsystem contracts, War Room patterns, health checks, and portability templates.
