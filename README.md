@@ -2,19 +2,25 @@
 
 ![AI OS Framework Hero](docs/demo-hero.png)
 
-Build a control plane, not just another pile of agent scripts.
+A local-first AI operating layer for people who need AI agents to stay observable, governable, and useful in real work.
 
-`ai-os-framework` is an open-source starter for people building AI systems that need to stay understandable at the operator and executive layer.
+Most AI agent projects can demo intelligence.
+Far fewer can answer the operational questions that matter:
 
-Most AI projects can demo intelligence.
-Much fewer can answer:
-
+- What changed?
 - What matters now?
 - What is blocked?
 - Which subsystem is drifting?
-- What should an operator do next?
+- What needs a human decision?
+- Can this system recover when something fails?
 
-This framework starts from that operating problem.
+`ai-os-framework` is an open-source starter kit for building an AI operating layer:
+one control plane, many domain subsystems, explicit contracts, and an executive War Room.
+
+Created by [Kenny Su](https://www.kdan.com/leadership), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/), this project comes from a private AI OS design effort across knowledge, trading, CRM, email, content, and company-state workflows.
+
+The public repo does not contain private data or company-specific runtime logic.
+It exposes the reusable framework: control-plane design, subsystem contracts, War Room patterns, health checks, and portability templates.
 
 It gives you:
 
@@ -31,9 +37,17 @@ It is designed for systems that need to be:
 - observable instead of opaque
 - portable across local hosts and server environments
 
-This repository is especially useful for founders, operators, and technical leaders who want AI systems that are legible under pressure, not just impressive in isolated sessions.
+This repository is especially useful for founders, operators, and technical leaders who want AI systems that remain legible under pressure, not just impressive in isolated sessions.
 
 It does **not** include private user data, personal CRM data, private email data, knowledge memory contents, or company-specific digital twin logic.
+
+## Who This Is For
+
+- Founders and CEOs building personal or company AI operating systems
+- Operators who need a War Room across tools, agents, and data sources
+- Technical leaders turning AI experiments into maintainable systems
+- Teams that want local-first, contract-first AI infrastructure
+- Builders who are tired of losing context inside closed agent sessions
 
 ## Why This Repo Is Different
 
@@ -207,6 +221,16 @@ Recommended flow:
 - example trading subsystem
 - example knowledge subsystem
 - example email subsystem
+
+## Origin
+
+This project was created by [Kenny Su](https://www.kdan.com/leadership), Founder, Chairman & CEO of [KDAN](https://www.kdan.com/).
+
+It comes from an internal AI OS design effort exploring how executives, operators, and technical teams can coordinate multiple AI agents without losing visibility, context, or control.
+
+The public repo does not contain private company data, personal memory, CRM records, email content, trading logic, or digital twin internals. It only exposes the reusable framework: control-plane design, subsystem contracts, War Room patterns, and portability templates.
+
+This is an independent open-source framework. It should not be interpreted as an official KDAN product unless explicitly stated.
 
 ## Public vs Private Boundary
 
